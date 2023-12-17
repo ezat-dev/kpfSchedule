@@ -63,6 +63,7 @@ public class LogProcessor {
 				ht01Rms.setQf2_time(qf2Obj.get("TEMP").toString());
 				
 				
+				
 				rmsService.setHT01RmsInsert(ht01Rms);
 				
 				
