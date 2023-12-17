@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rms">
+	<!-- 푸시알람을 보내야 하는 알람의 목록 -->
+	<select id="getRmsData" resultType="rms">
+		SELECT *
+		FROM tb_rms
+	</select>
+	
+	
+</mapper>
