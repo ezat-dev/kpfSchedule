@@ -25,7 +25,7 @@ public class LogProcessor {
 	//10초 주기로 동작
 	@Scheduled(fixedRate = 10000)
 	public void handle(){
-		System.out.println(val++);
+//		System.out.println(val++);
 		
 		List<Rms> rmsArray = rmsService.getRmsData();
 		if(rmsArray.size() != 0) {
@@ -151,15 +151,15 @@ public class LogProcessor {
 	*/
 						rmsMap.put("qf_mesh_speed_sp_set", tempObj.get("QF_MESH_SPEED_SP_SET"));
 						rmsMap.put("qf_mesh_speed_time_set", tempObj.get("QF_MESH_SPEED_TIME_SET"));
-						rmsMap.put("qf1_next_sp", tempObj.get("QF1_NEXT_TIME_SET"));
+						rmsMap.put("qf1_next_sp", tempObj.get("QF1_NEXT_SP"));
 						rmsMap.put("qf1_next_time_set", tempObj.get("QF1_NEXT_TIME_SET"));
-						rmsMap.put("qf2_next_sp", tempObj.get("QF2_NEXT_TIME_SET"));
+						rmsMap.put("qf2_next_sp", tempObj.get("QF2_NEXT_SP"));
 						rmsMap.put("qf2_next_time_set", tempObj.get("QF2_NEXT_TIME_SET"));
-						rmsMap.put("qf3_next_sp", tempObj.get("QF3_NEXT_TIME_SET"));
+						rmsMap.put("qf3_next_sp", tempObj.get("QF3_NEXT_SP"));
 						rmsMap.put("qf3_next_time_set", tempObj.get("QF3_NEXT_TIME_SET"));
-						rmsMap.put("qf4_next_sp", tempObj.get("QF4_NEXT_TIME_SET"));
+						rmsMap.put("qf4_next_sp", tempObj.get("QF4_NEXT_SP"));
 						rmsMap.put("qf4_next_time_set", tempObj.get("QF4_NEXT_TIME_SET"));
-						rmsMap.put("qf5_next_sp", tempObj.get("QF5_NEXT_TIME_SET"));
+						rmsMap.put("qf5_next_sp", tempObj.get("QF5_NEXT_SP"));
 						rmsMap.put("qf5_next_time_set", tempObj.get("QF5_NEXT_TIME_SET"));
 						rmsMap.put("agitator_sp_set", tempObj.get("AGITATOR_SP_SET"));
 						rmsMap.put("agitator_time_set", tempObj.get("AGITATOR_TIME_SET"));
@@ -167,19 +167,19 @@ public class LogProcessor {
 						rmsMap.put("qt_mesh_speed_time_set", tempObj.get("QT_MESH_SPEED_TIME_SET"));
 						rmsMap.put("tf_mesh_speed_sp_set", tempObj.get("TF_MESH_SPEED_SP_SET"));
 						rmsMap.put("tf_mesh_speed_time_set", tempObj.get("TF_MESH_SPEED_TIME_SET"));
-						rmsMap.put("tf1_next_sp", tempObj.get("TF1_NEXT_TIME_SET"));
+						rmsMap.put("tf1_next_sp", tempObj.get("TF1_NEXT_SP"));
 						rmsMap.put("tf1_next_time_set", tempObj.get("TF1_NEXT_TIME_SET"));
-						rmsMap.put("tf2_next_sp", tempObj.get("TF2_NEXT_TIME_SET"));
+						rmsMap.put("tf2_next_sp", tempObj.get("TF2_NEXT_SP"));
 						rmsMap.put("tf2_next_time_set", tempObj.get("TF2_NEXT_TIME_SET"));
-						rmsMap.put("tf3_next_sp", tempObj.get("TF3_NEXT_TIME_SET"));
+						rmsMap.put("tf3_next_sp", tempObj.get("TF3_NEXT_SP"));
 						rmsMap.put("tf3_next_time_set", tempObj.get("TF3_NEXT_TIME_SET"));
-						rmsMap.put("tf4_next_sp", tempObj.get("TF4_NEXT_TIME_SET"));
+						rmsMap.put("tf4_next_sp", tempObj.get("TF4_NEXT_SP"));
 						rmsMap.put("tf4_next_time_set", tempObj.get("TF4_NEXT_TIME_SET"));
-						rmsMap.put("tf5_next_sp", tempObj.get("TF5_NEXT_TIME_SET"));
+						rmsMap.put("tf5_next_sp", tempObj.get("TF5_NEXT_SP"));
 						rmsMap.put("tf5_next_time_set", tempObj.get("TF5_NEXT_TIME_SET"));
-						rmsMap.put("cp1_next_sp", tempObj.get("CP1_NEXT_TIME_SET"));
+						rmsMap.put("cp1_next_sp", tempObj.get("CP1_NEXT_SP"));
 						rmsMap.put("cp1_next_time_set", tempObj.get("CP1_NEXT_TIME_SET"));
-						rmsMap.put("cp2_next_sp", tempObj.get("CP2_NEXT_TIME_SET"));
+						rmsMap.put("cp2_next_sp", tempObj.get("CP2_NEXT_SP"));
 						rmsMap.put("cp2_next_time_set", tempObj.get("CP2_NEXT_TIME_SET"));
 						
 						
