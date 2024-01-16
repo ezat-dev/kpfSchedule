@@ -22,7 +22,7 @@ public class RmsDaoImpl implements RmsDao{
 
 	@Override
 	public void setRmsDataInsert(Map<String, Object> rmsMap) {
-		System.out.println("DAO : "+rmsMap.get("apy_uid")+"// >> "+rmsMap.get("apy_his_seq"));
+//		System.out.println("DAO : "+rmsMap.get("apy_uid")+"// >> "+rmsMap.get("apy_his_seq"));
 		sqlSession.insert("rms.setRmsDataInsert",rmsMap);
 	}
 

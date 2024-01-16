@@ -45,6 +45,11 @@ public class LogProcessor {
 				String create_user_id = rmsArray.get(i).getCreate_user_id();
 				String create_time = rmsArray.get(i).getCreate_time();
 				String change_type = rmsArray.get(i).getChange_type();
+				String mat_std = rmsArray.get(i).getMat_std();
+				String mat_code = rmsArray.get(i).getMat_code();
+				String mat_desc = rmsArray.get(i).getMat_desc();
+				String inv_mat_code = rmsArray.get(i).getInv_mat_code();
+				String inv_mat_desc = rmsArray.get(i).getInv_mat_desc();
 			
 				rmsMap.put("factory_code", factory_code);
 				rmsMap.put("apy_uid", apy_uid);
@@ -58,8 +63,13 @@ public class LogProcessor {
 				rmsMap.put("create_user_id", create_user_id);
 				rmsMap.put("create_time", create_time);
 				rmsMap.put("change_type", change_type);
+				rmsMap.put("mat_std",mat_std);
+				rmsMap.put("mat_code",mat_code);
+				rmsMap.put("mat_desc",mat_desc);
+				rmsMap.put("inv_mat_code",inv_mat_code);
+				rmsMap.put("inv_mat_desc",inv_mat_desc);
 				
-				System.out.println("apy_uid : "+apy_uid+"// apy_his_seq : "+apy_his_seq);
+//				System.out.println("apy_uid : "+apy_uid+"// apy_his_seq : "+apy_his_seq);
 				
 				//apy_uid, apy_his_seq 기준 0일때만 insert
 				int chk_value = rmsService.getRmsDataChkValue(rmsMap);
@@ -82,11 +92,11 @@ public class LogProcessor {
 					
 	//				System.out.println("equip_code = "+equip_code+"// recipe_apy_data = "+recipe_apy_data);
 					
-					System.out.println("JSON get 시작");
+//					System.out.println("JSON get 시작");
 					JSONParser parser = new JSONParser();
 					JSONObject recipe_apy_dataObj;
 					try {
-						System.out.println("JSON get 진행중");
+//						System.out.println("JSON get 진행중");
 						recipe_apy_dataObj = (JSONObject)parser.parse(recipe_apy_data);
 						
 	//					System.out.println(recipe_apy_dataObj.get("paramList"));
@@ -98,8 +108,8 @@ public class LogProcessor {
 							
 	//						System.out.println(paramListArray.get(0));
 							JSONObject rowObj = (JSONObject)paramListArray.get(j);
-							System.out.println("i : "+j+"//itemCode : "+rowObj.get("itemCode").toString()+"//value : "+rowObj.get("value").toString());
-							System.out.println("j : "+j+"//itemCode : "+rowObj.get("itemCode")+"//value : "+rowObj.get("value"));
+//							System.out.println("i : "+j+"//itemCode : "+rowObj.get("itemCode").toString()+"//value : "+rowObj.get("value").toString());
+//							System.out.println("j : "+j+"//itemCode : "+rowObj.get("itemCode")+"//value : "+rowObj.get("value"));
 							
 							String itemCode = rowObj.get("itemCode").toString();
 							String value = rowObj.get("value").toString();
@@ -113,12 +123,12 @@ public class LogProcessor {
 						}
 						str.append("}");
 						
-						System.out.println("=============================");
-						System.out.println(str.toString());
+//						System.out.println("=============================");
+//						System.out.println(str.toString());
 						
 						JSONObject tempObj = (JSONObject)parser.parse(str.toString());
-						System.out.println("*****************************");
-						System.out.println(tempObj);
+//						System.out.println("*****************************");
+//						System.out.println(tempObj);
 	/*					
 						rmsData.setQf_mesh_speed_sp_set(tempObj.get("QF_MESH_SPEED_SP_SET").toString());
 						rmsData.setQf_mesh_speed_time_set(tempObj.get("QF_MESH_SPEED_TIME_SET").toString());
@@ -185,9 +195,9 @@ public class LogProcessor {
 						
 						
 					
-						System.out.println("--------------------------------");
-						System.out.println(rmsMap.get("qf_mesh_speed_sp_set")+", "+rmsMap.get("qf_mesh_speed_time_set"));
-						System.out.println(rmsMap.get("qf1_sp_set")+", "+rmsMap.get("qf1_time_set"));
+//						System.out.println("--------------------------------");
+//						System.out.println(rmsMap.get("qf_mesh_speed_sp_set")+", "+rmsMap.get("qf_mesh_speed_time_set"));
+//						System.out.println(rmsMap.get("qf1_sp_set")+", "+rmsMap.get("qf1_time_set"));
 	
 						rmsService.setRmsDataInsert(rmsMap);
 					} catch (ParseException e) {

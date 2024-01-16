@@ -15,6 +15,12 @@ public class Rms {
 	private String create_user_id;
 	private String create_time;
 	private String change_type;
+	private String mat_code;
+	private String mat_desc;
+	private String mat_std;
+	private String inv_mat_code;
+	private String inv_mat_desc;
+	
 	
 	public String getFactory_code() {
 		return factory_code;
@@ -93,6 +99,36 @@ public class Rms {
 	}
 	public void setChange_type(String change_type) {
 		this.change_type = change_type;
+	}
+	public String getMat_code() {
+		return mat_code;
+	}
+	public void setMat_code(String mat_code) {
+		this.mat_code = mat_code;
+	}
+	public String getMat_desc() {
+		return mat_desc;
+	}
+	public void setMat_desc(String mat_desc) {
+		this.mat_desc = mat_desc;
+	}
+	public String getMat_std() {
+		return mat_std;
+	}
+	public void setMat_std(String mat_std) {
+		this.mat_std = mat_std;
+	}
+	public String getInv_mat_code() {
+		return inv_mat_code;
+	}
+	public void setInv_mat_code(String inv_mat_code) {
+		this.inv_mat_code = inv_mat_code;
+	}
+	public String getInv_mat_desc() {
+		return inv_mat_desc;
+	}
+	public void setInv_mat_desc(String inv_mat_desc) {
+		this.inv_mat_desc = inv_mat_desc;
 	}
 	
 	

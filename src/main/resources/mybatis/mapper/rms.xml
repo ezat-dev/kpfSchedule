@@ -43,7 +43,8 @@
 			#{tf1_next_sp}, #{tf1_next_time_set}, #{tf2_next_sp}, #{tf2_next_time_set},
 			#{tf3_next_sp}, #{tf3_next_time_set}, #{tf4_next_sp}, #{tf4_next_time_set},
 			#{tf5_next_sp}, #{tf5_next_time_set},
-			#{cp1_next_sp}, #{cp1_next_time_set}, #{cp2_next_sp}, #{cp2_next_time_set}		
+			(#{cp1_next_sp}*100), #{cp1_next_time_set}, (#{cp2_next_sp}*100), #{cp2_next_time_set},
+			#{inv_mat_code}, #{inv_mat_desc}, #{mat_std}, #{mat_code}, #{mat_desc}	
 		);
 		
 	</insert>
