@@ -18,6 +18,7 @@
 
 	<task:annotation-driven executor="executor" scheduler="scheduler" proxy-target-class="false"/>
 	<bean id="logProcessor" class="com.kpf.async.LogProcessor" />
+	<bean id="rmsYnProcessor" class="com.kpf.async.RmsYnProcessor" />
 	<task:scheduler id="scheduler" pool-size="4" />
 	<task:executor id="executor" keep-alive="10" pool-size="10-20"
 		queue-capacity="10" rejection-policy="ABORT" />

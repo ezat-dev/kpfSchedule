@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kpf.dao.RmsDao;
+import com.kpf.domain.HtDelay;
 import com.kpf.domain.Rms;
+import com.kpf.domain.RmsYn;
 
 @Service
 public class RmsServiceImpl implements RmsService{
@@ -28,5 +30,25 @@ public class RmsServiceImpl implements RmsService{
 	@Override
 	public int getRmsDataChkValue(Map<String, Object> rmsMap) {
 		return rmsDao.getRmsDataChkValue(rmsMap);
+	}
+
+	@Override
+	public List<RmsYn> getRmsYnList() {
+		return rmsDao.getRmsYnList();
+	}
+
+	@Override
+	public void setRmsYnInsert(Map<String, Object> rmsObj) {
+		rmsDao.setRmsYnInsert(rmsObj);
+	}
+
+	@Override
+	public List<HtDelay> getHtDelayList() {
+		return rmsDao.getHtDelayList();
+	}
+
+	@Override
+	public void setHtDelayInsert(HtDelay htDelay) {
+		rmsDao.setHtDelayInsert(htDelay);
 	}
 }

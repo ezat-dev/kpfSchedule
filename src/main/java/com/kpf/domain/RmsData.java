@@ -44,6 +44,8 @@ public class RmsData {
 	private String cp1_next_sp;
 	private String cp1_next_time_set;
 	
+	//가산시간
+	private String add_time;
 	
 	public String getCp1_next_sp() {
 		return cp1_next_sp;
@@ -284,6 +286,12 @@ public class RmsData {
 	}
 	public void setTf4_next_time_set(String tf4_next_time_set) {
 		this.tf4_next_time_set = tf4_next_time_set;
+	}
+	public String getAdd_time() {
+		return add_time;
+	}
+	public void setAdd_time(String add_time) {
+		this.add_time = add_time;
 	}
 	
 	

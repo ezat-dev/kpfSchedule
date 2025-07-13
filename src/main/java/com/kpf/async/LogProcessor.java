@@ -1,5 +1,8 @@
 package com.kpf.async;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +14,10 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.kpf.domain.HtDelay;
 import com.kpf.domain.Rms;
 import com.kpf.domain.RmsData;
+import com.kpf.domain.RmsYn;
 import com.kpf.service.RmsService;
 
 public class LogProcessor {
@@ -28,10 +33,15 @@ public class LogProcessor {
 //		System.out.println(val++);
 		
 		List<Rms> rmsArray = rmsService.getRmsData();
+		
+//		System.out.println("size : "+rmsArray.size());
 		if(rmsArray.size() != 0) {
+			
 			for(int i=0; i<rmsArray.size(); i++) {
 				Map<String, Object> rmsMap = new HashMap<String, Object>();
 				RmsData rmsData = new RmsData();
+//				System.out.println(rmsArray.get(i).getApy_uid());
+				
 				
 				String factory_code = rmsArray.get(i).getFactory_code();
 				String apy_uid = rmsArray.get(i).getApy_uid();
@@ -45,11 +55,6 @@ public class LogProcessor {
 				String create_user_id = rmsArray.get(i).getCreate_user_id();
 				String create_time = rmsArray.get(i).getCreate_time();
 				String change_type = rmsArray.get(i).getChange_type();
-				String mat_std = rmsArray.get(i).getMat_std();
-				String mat_code = rmsArray.get(i).getMat_code();
-				String mat_desc = rmsArray.get(i).getMat_desc();
-				String inv_mat_code = rmsArray.get(i).getInv_mat_code();
-				String inv_mat_desc = rmsArray.get(i).getInv_mat_desc();
 			
 				rmsMap.put("factory_code", factory_code);
 				rmsMap.put("apy_uid", apy_uid);
@@ -63,16 +68,12 @@ public class LogProcessor {
 				rmsMap.put("create_user_id", create_user_id);
 				rmsMap.put("create_time", create_time);
 				rmsMap.put("change_type", change_type);
-				rmsMap.put("mat_std",mat_std);
-				rmsMap.put("mat_code",mat_code);
-				rmsMap.put("mat_desc",mat_desc);
-				rmsMap.put("inv_mat_code",inv_mat_code);
-				rmsMap.put("inv_mat_desc",inv_mat_desc);
 				
 //				System.out.println("apy_uid : "+apy_uid+"// apy_his_seq : "+apy_his_seq);
 				
 				//apy_uid, apy_his_seq 기준 0일때만 insert
 				int chk_value = rmsService.getRmsDataChkValue(rmsMap);
+//				System.out.println("chk_value : "+chk_value);
 				if(chk_value == 0) {
 	/*				
 					rmsData.setFactory_code(factory_code);
@@ -90,7 +91,7 @@ public class LogProcessor {
 	*/
 					String recipe_apy_data = rmsArray.get(i).getRecipe_apy_data();
 					
-	//				System.out.println("equip_code = "+equip_code+"// recipe_apy_data = "+recipe_apy_data);
+//					System.out.println("equip_code = "+equip_code+"// recipe_apy_data = "+recipe_apy_data);
 					
 //					System.out.println("JSON get 시작");
 					JSONParser parser = new JSONParser();
@@ -100,6 +101,7 @@ public class LogProcessor {
 						recipe_apy_dataObj = (JSONObject)parser.parse(recipe_apy_data);
 						
 	//					System.out.println(recipe_apy_dataObj.get("paramList"));
+						String add_time = recipe_apy_dataObj.get("addTime").toString();
 						JSONArray paramListArray = (JSONArray)recipe_apy_dataObj.get("paramList");
 						
 						StringBuffer str = new StringBuffer();
@@ -112,14 +114,13 @@ public class LogProcessor {
 //							System.out.println("j : "+j+"//itemCode : "+rowObj.get("itemCode")+"//value : "+rowObj.get("value"));
 							
 							String itemCode = rowObj.get("itemCode").toString();
-							String value = rowObj.get("value").toString();
+							String value = rowObj.get("value").toString().replace("\"", "");
 							
 							if(j == paramListArray.size()-1) {
 								str.append("\""+itemCode+"\":"+"\""+value+"\"");
 							}else {
 								str.append("\""+itemCode+"\":"+"\""+value+"\",");
 							}
-							
 						}
 						str.append("}");
 						
@@ -191,14 +192,43 @@ public class LogProcessor {
 						rmsMap.put("cp1_next_time_set", tempObj.get("CP1_NEXT_TIME_SET"));
 						rmsMap.put("cp2_next_sp", tempObj.get("CP2_NEXT_SP"));
 						rmsMap.put("cp2_next_time_set", tempObj.get("CP2_NEXT_TIME_SET"));
+						rmsMap.put("mat_std",tempObj.get("MAT_STD"));
+						rmsMap.put("mat_code",tempObj.get("MAT_CODE"));
+						rmsMap.put("mat_desc",tempObj.get("MAT_DESC"));
+						rmsMap.put("inv_mat_code",tempObj.get("INV_MAT_CODE"));
+						rmsMap.put("inv_mat_desc",tempObj.get("INV_MAT_DESC"));
+						rmsMap.put("add_time",add_time);
 						
+/*						
+						System.out.println("--------------------------------");
+						System.out.println(URLEncoder.encode(tempObj.get("MAT_DESC").toString(),"utf-8"));
+						System.out.println(URLEncoder.encode(tempObj.get("INV_MAT_CODE").toString(),"utf-8"));
+						System.out.println(URLEncoder.encode(tempObj.get("EQUIP_DESC").toString(),"utf-8"));
+						System.out.println(tempObj.get("EQUIP_DESC"));
+						System.out.println("--------------------------------");
+						String encode_mat_desc = URLEncoder.encode(tempObj.get("MAT_DESC").toString(),"utf-8");
+						String encode_inv_mat_desc = URLEncoder.encode(tempObj.get("INV_MAT_DESC").toString(),"utf-8");
+						String encode_equip_desc = URLEncoder.encode(tempObj.get("EQUIP_DESC").toString(),"utf-8");
+						System.out.println(URLDecoder.decode(encode_mat_desc,"utf-8"));
+						System.out.println(URLDecoder.decode(encode_inv_mat_desc,"utf-8"));
+						System.out.println(URLDecoder.decode(encode_equip_desc,"euc-kr"));
+						System.out.println("--------------------------------");
+						String brokenKorean = tempObj.get("EQUIP_DESC").toString();
 						
+						byte[] brokenBytes = brokenKorean.getBytes("ISO-8859-1");
+						byte[] brokenBytes2 = brokenKorean.getBytes("");
 						
-					
-//						System.out.println("--------------------------------");
+						String correctKorean = new String(brokenBytes, "UTF-8");
+						String correctKorean2 = new String(brokenBytes2, "UTF-8");
+						String correctKorean3 = new String(brokenBytes, "EUC-KR");
+						String correctKorean2 = new String(brokenBytes2, "UTF-8");
+						
+						System.out.println("변환 설비명 : "+correctKorean);
+						System.out.println("변환 설비명2 : "+correctKorean2);
+*/						
 //						System.out.println(rmsMap.get("qf_mesh_speed_sp_set")+", "+rmsMap.get("qf_mesh_speed_time_set"));
 //						System.out.println(rmsMap.get("qf1_sp_set")+", "+rmsMap.get("qf1_time_set"));
-	
+//						System.out.println(rmsMap.toString());
 						rmsService.setRmsDataInsert(rmsMap);
 					} catch (ParseException e) {
 						e.printStackTrace();
@@ -206,5 +236,15 @@ public class LogProcessor {
 				}
 			}
 		}
+				
+		//설비의 템퍼링 온도차이에 따른 지연시간 저장
+		List<HtDelay> htDelayList = rmsService.getHtDelayList();
+		
+		if(htDelayList.size() != 0) {
+			for(int i=0; i<htDelayList.size(); i++) {
+				rmsService.setHtDelayInsert(htDelayList.get(i));
+			}
+		}
+		
 	}
 }

@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kpf.domain.HtDelay;
 import com.kpf.domain.Rms;
+import com.kpf.domain.RmsYn;
 
 @Repository
 public class RmsDaoImpl implements RmsDao{
@@ -29,5 +31,25 @@ public class RmsDaoImpl implements RmsDao{
 	@Override
 	public int getRmsDataChkValue(Map<String, Object> rmsMap) {
 		return sqlSession.selectOne("rms.getRmsDataChkValue",rmsMap);
+	}
+
+	@Override
+	public List<RmsYn> getRmsYnList() {
+		return sqlSession.selectList("rms.getRmsYnList");
+	}
+
+	@Override
+	public void setRmsYnInsert(Map<String, Object> rmsObj) {
+		sqlSession.update("rms.setRmsYnInsert", rmsObj);
+	}
+
+	@Override
+	public List<HtDelay> getHtDelayList() {
+		return sqlSession.selectList("rms.getHtDelayList");
+	}
+
+	@Override
+	public void setHtDelayInsert(HtDelay htDelay) {
+		sqlSession.insert("rms.setHtDelayInsert", htDelay);
 	}
 }

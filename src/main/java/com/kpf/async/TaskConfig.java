@@ -43,6 +43,12 @@ public class TaskConfig implements SchedulingConfigurer, AsyncConfigurer {
 	public LogProcessor logProcessor() {
 		return new LogProcessor();
 	}
+	
+	@Bean
+	public RmsYnProcessor rmsYnProcessor() {
+		return new RmsYnProcessor();
+	}
+	
 	@Override
 	public Executor getAsyncExecutor() {
 		return taskScheduler();

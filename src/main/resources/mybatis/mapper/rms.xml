@@ -43,8 +43,8 @@
 			#{tf1_next_sp}, #{tf1_next_time_set}, #{tf2_next_sp}, #{tf2_next_time_set},
 			#{tf3_next_sp}, #{tf3_next_time_set}, #{tf4_next_sp}, #{tf4_next_time_set},
 			#{tf5_next_sp}, #{tf5_next_time_set},
-			(#{cp1_next_sp}*100), #{cp1_next_time_set}, (#{cp2_next_sp}*100), #{cp2_next_time_set},
-			#{inv_mat_code}, #{inv_mat_desc}, #{mat_std}, #{mat_code}, #{mat_desc}	
+			#{cp1_next_sp}, #{cp1_next_time_set}, #{cp2_next_sp}, #{cp2_next_time_set},
+			#{inv_mat_code}, #{inv_mat_desc}, #{mat_std}, #{mat_code}, #{mat_desc}, #{add_time}
 		);
 		
 	</insert>
@@ -54,4 +54,30 @@
 		SELECT COUNT(*) AS ccnt FROM tb_rms_data WHERE apy_uid = #{apy_uid} AND apy_his_seq = #{apy_his_seq}
 	</select>
 	
+	<select id="getRmsYnList" resultType="rmsYn">
+		SELECT EQUIP_CODE, EQUIP_DESC, EQUIP_CMF_25
+    	FROM mraseqpdef_link
+        WHERE equip_code IN ('122010','122020','122030','122040','122050','122060','122070','122021','122022','122080','124010','124020','124030')
+	</select>
+	
+	<update id="setRmsYnInsert" parameterType="rmsYn">
+		UPDATE tb_rms_chk SET equip_cmf_25 = #{equip_cmf_25}
+		WHERE equip_code = #{equip_code} AND equip_desc = #{equip_desc}
+	</update>
+	
+	
+	<select id="getHtDelayList" resultType="htDelay">
+		SELECT *
+    	FROM maddtbldat_link
+        WHERE 1=1
+        AND FACTORY_CODE = '1000'
+        AND TABLE_NAME = 'KPF_RMS_PROD_TERM'
+	</select>	
+	
+	<insert id="setHtDelayInsert" parameterType="htDelay" statementType="CALLABLE">
+		{CALL sp_htdelay_set(#{factory_code},#{table_name}, #{key_1}, #{key_2}, #{key_3}, #{key_4}, #{key_5},
+		#{key_desc}, #{seq_no}, #{data_1}, #{data_2}, #{data_3}, #{data_4}, #{data_5},
+		#{data_6}, #{data_7}, #{data_8}, #{data_9}, #{data_10}, #{disable_flag},
+		#{create_user_id}, #{create_time}, #{update_user_id}, #{update_time})}
+	</insert>	
 </mapper>
